@@ -13,5 +13,16 @@ services:
       POSTGRES_USER: drautopart
       POSTGRES_PASSWORD: drautopart@dev
 
+  app:
+    build: .
+    container_name: 'nest_app'
+    restart: always
+    depends_on:
+      - pgsql
+    environment:
+      DATABASE_URL: postgresql://drautopart:drautopart@dev@pgsql:5432/postgres
+    ports:
+      - '3000:3000'
+
 volumes:
   pg-data:
